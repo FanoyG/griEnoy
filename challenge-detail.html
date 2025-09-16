@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOC Challenge Lab - Challenge Details</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+    body { background:#1B1B1B; color:#F5F5F5; font-family:'Roboto Mono',monospace; }
+    ::-webkit-scrollbar{height:8px;width:8px;}
+    ::-webkit-scrollbar-track{background:#1B1B1B;border-radius:10px;}
+    ::-webkit-scrollbar-thumb{background:#2D2D2D;border-radius:10px;}
+    ::-webkit-scrollbar-thumb:hover{background:#4A4A4A;}
+    .terminal { background:#0d0d0d; border-radius:8px; padding:1rem; font-family:'Roboto Mono',monospace; }
+    .terminal-line { color:#00FFC2; }
+
+    nav a {
+      font-size: 24px;
+    }
+  </style>
+  <!-- Load Challenge Data -->
+  <script src="challenges.js"></script>
+</head>
+<body class="selection:bg-green-300 selection:text-green-900">
+<div class="container mx-auto max-w-7xl px-4 md:px-0 py-5">
+  <!-- Header -->
+  <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5">
+    <img src="logo1.png" alt="Logo" width="175px">
+    <nav class="flex flex-wrap items-center text-base justify-center md:justify-end">
+      <a href="landing.html" class="mr-5 text-gray-400 hover:text-[#FFB266]">Home</a>
+      <a href="challenges.html" class="mr-5 text-gray-400 hover:text-[#FFB266]">Challenges</a>
+      <a href="#" class="mr-5 text-gray-400 hover:text-[#FFB266]">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="bg-gray-800 p-8 rounded-xl shadow-lg mt-8">
+    <div id="main-content"></div>
+    <div id="error-message" class="hidden text-center text-2xl font-bold text-red-500 p-8">
+      Challenge not found.
+    </div>
+    <div class="flex justify-center mt-8">
+      <a href="challenges.html" class="inline-flex items-center font-bold py-2 px-6 rounded-full text-base bg-gray-700 text-white hover:bg-gray-600 hover:scale-105">
+        ← Back to Challenges
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer class="text-gray-400 body-font border-t border-gray-800 mt-5">
+  <div class="container px-5 py-4 mx-auto flex items-center justify-between">
+    <p class="text-sm">© 2025 SOC Challenge Lab</p>
+    <span class="inline-flex space-x-3">
+      <a href="#" class="hover:text-white">🐦</a>
+      <a href="#" class="hover:text-white">📷</a>
+      <a href="#" class="hover:text-white">💼</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+// ============================================
+// Load challenge based on ?id= in URL
+// Uses challengeData from challenges-data.js
+// ============================================
+
+window.onload = () => {
+  loadChallenge();
+};
+
+function loadChallenge(){
+  const id = parseInt(new URLSearchParams(window.location.search).get("id"));
+  const challenge = findChallengeById(id);
+  const container = document.getElementById("main-content");
+
+  if(!challenge){
+    document.getElementById("error-message").classList.remove("hidden");
+    return;
+  }
+
+  if(challenge.type==="script"){
+    container.innerHTML = renderScriptLayout(challenge);
+  } else if(challenge.type==="command"){
+    container.innerHTML = renderCommandLayout(challenge);
+  }
+}
+
+// ============================================
+// Helpers
+// ============================================
+
+function findChallengeById(id){
+  for(const skill in challengeData){
+    for(const topic in challengeData[skill]){
+      for(const ch of challengeData[skill][topic]){
+        if(ch.id === id){ return ch; }
+      }
+    }
+  }
+  return null;
+}
+
+// Script Layout
+function renderScriptLayout(challenge){
+  return `
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-[#00FFC2]">Challenge: ${challenge.name}</h1>
+      <p class="text-gray-400 mt-2">${challenge.description}</p>
+    </div>
+
+    <!-- Overall Description -->
+    <div class="mb-8 p-4 bg-gray-900 rounded-lg">
+      <h2 class="text-2xl font-bold mb-2">Overview</h2>
+      <p class="text-gray-300">${challenge.overview || "This challenge will test your skills in a realistic SOC scenario."}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="border-r border-gray-700 md:pr-8">
+        <h2 class="text-2xl font-bold mb-4">Challenge Scenario</h2>
+        <p class="text-gray-400">${challenge.scenario || "Follow the script instructions."}</p>
+        <h2 class="text-2xl font-bold mt-8 mb-4">Setup Instructions</h2>
+        <ul class="list-disc list-inside text-gray-400 space-y-2">
+            <li>Download the challenge script below.</li>
+            <li>Run inside your VM (not your main PC).</li>
+            <li>Follow the instructions in the script carefully to avoid errors.</li>
+            <li>Document your steps and findings for submission or review.</li>
+        </ul>
+        ${challenge.script ? `<a href="${challenge.script}" class="inline-flex items-center font-bold py-2 px-6 rounded-full bg-[#00FFC2] text-gray-900 mt-6">📥 Download Script</a>` : ""}
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Task</h2>
+        <p class="text-gray-400">${challenge.task}</p>
+        <div class="mt-6 flex">
+          <input id="answer-input" class="flex-grow bg-gray-900 rounded-l-full p-3" placeholder="Enter flag">
+          <button onclick="checkAnswer('${challenge.flag}')" class="py-2 px-6 rounded-r-full bg-[#00FFC2] text-gray-900">Submit</button>
+        </div>
+        <div id="feedback" class="mt-3"></div>
+        <h2 class="text-2xl font-bold mt-8 mb-4">Hints</h2>
+        ${renderHints(challenge.hints)}
+      </div>
+    </div>`;
+}
+
+// Command Layout
+function renderCommandLayout(challenge){
+  return `
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-[#00FFC2]">Challenge: ${challenge.name}</h1>
+      <p class="text-gray-400 mt-2">${challenge.description}</p>
+    </div>
+
+    <!-- Overall Description -->
+    <div class="mb-8 p-4 bg-gray-900 rounded-lg">
+      <h2 class="text-2xl font-bold mb-2">Overview</h2>
+      <p class="text-gray-300">${challenge.overview || "This challenge will test your command-line investigation and analysis skills."}</p>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4">Challenge Scenario</h2>
+    <p class="text-gray-400 mb-6">${challenge.scenario || ""}</p>
+    <h2 class="text-2xl font-bold mb-4">Interactive Terminal</h2>
+    <div class="terminal" id="terminal-box">
+      <div class="terminal-line">student@lab:~$ <span id="terminal-output"></span></div>
+      <div class="flex mt-2">
+        <input id="command-input" class="flex-grow bg-black text-green-400 p-2 rounded-l" placeholder="Type your command here...">
+        <button onclick="submitCommand('${challenge.flag}')" class="py-2 px-4 rounded-r bg-[#00FFC2] text-black">Run</button>
+      </div>
+      <div id="command-feedback" class="mt-3"></div>
+    </div>
+    <h2 class="text-2xl font-bold mt-8 mb-4">Hints</h2>
+    ${renderHints(challenge.hints)}`;
+}
+
+// Hints Renderer
+function renderHints(hints){
+  if(!hints) return "<p class='text-gray-400'>No hints available.</p>";
+  return hints.map((h,i)=>`
+    <details class="bg-gray-900 p-3 rounded">
+      <summary>Hint ${i+1}</summary>
+      <p class="text-gray-400 mt-2">${h}</p>
+    </details>
+  `).join("");
+}
+
+// Answer Checkers
+function checkAnswer(correct){
+  const val = document.getElementById("answer-input").value.trim();
+  const feedback = document.getElementById("feedback");
+  if(val.toLowerCase()===correct.toLowerCase()){
+    feedback.textContent="✅ Correct!";
+    feedback.className="mt-3 text-green-400";
+  } else {
+    feedback.textContent="❌ Try again.";
+    feedback.className="mt-3 text-red-400";
+  }
+}
+
+function submitCommand(correct){
+  const cmd = document.getElementById("command-input").value.trim();
+  const feedback = document.getElementById("command-feedback");
+  if(cmd.toLowerCase()===correct.toLowerCase()){
+    feedback.textContent="✅ Correct command!";
+    feedback.className="mt-3 text-green-400";
+  } else {
+    feedback.textContent="❌ Incorrect command.";
+    feedback.className="mt-3 text-red-400";
+  }
+}
+</script>
+</body>
+</html>

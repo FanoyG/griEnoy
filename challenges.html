@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOC Challenge Lab - Challenges</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+    body {
+      background-color: #1B1B1B;
+      color: #F5F5F5;
+      font-family: 'Roboto Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      height: 8px;
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1B1B1B;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2D2D2D;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4A4A4A;
+    }
+  </style>
+</head>
+<body class="selection:bg-green-300 selection:text-green-900">
+  <div class="container mx-auto max-w-7xl px-4 md:px-0">
+
+    <!-- Header -->
+    <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5">
+      <a href="index.html" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+        <img src="logo1.png" alt="Logo" width="150px" height="112px">
+      </a>
+      <nav class="flex flex-wrap items-center text-base justify-center md:justify-end">
+            <a href="index.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
+            <a href="challenges.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
+            <a href="docs.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
+            <a href="roadmap.html" class="px-5 py-3 rounded-full text-lg font-extrabold text-gray-900 bg-[#FFB266] shadow-[0_0_20px_#00FFC2] hover:shadow-[0_0_40px_#00FFC2] hover:scale-105 transition-transform duration-300">
+                See Roadmap
+            </a>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="py-5">
+      <h1 class="text-4xl font-bold text-white mb-8 text-center">Challenge Library</h1>
+
+      <!-- Skills Navigation -->
+      <nav class="flex flex-wrap justify-center md:justify-start mb-8 gap-2" id="skill-nav"></nav>
+
+      <!-- Topics -->
+      <div class="mb-12" id="topics-section">
+        <h2 class="text-3xl font-bold text-[#00FFC2] mb-6 border-b-2 border-gray-700 pb-2">Topics</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="topics-container"></div>
+      </div>
+
+      <!-- Challenges -->
+      <div id="challenges-section">
+        <h2 class="text-3xl font-bold text-[#00FFC2] mb-6 border-b-2 border-gray-700 pb-2">Challenges</h2>
+        <div id="challenges-container"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-gray-400 body-font border-t border-gray-800 mt-5">
+    <div class="container px-5 py-4 mx-auto flex items-center sm:flex-row flex-col justify-between">
+      <p class="text-sm text-gray-400">© 2025 SOC Challenge Lab</p>
+      <span class="inline-flex space-x-3">
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">🐦</a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">📷</a>
+        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">💼</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Load shared dataset -->
+  <script src="challenges.js"></script>
+
+  <script>
+    let currentSkill = 'Windows';
+    let currentTopic = '';
+
+    window.onload = function() {
+      renderSkills();
+      const defaultTopic = Object.keys(challengeData[currentSkill])[0];
+      renderTopics(currentSkill, defaultTopic);
+    }
+
+    function renderSkills() {
+      const navContainer = document.getElementById('skill-nav');
+      navContainer.innerHTML = '';
+      Object.keys(challengeData).forEach(skill => {
+        const button = document.createElement('button');
+        button.textContent = skill;
+        button.className = `py-2 px-6 rounded-full font-bold transition duration-300 ${
+          skill === currentSkill 
+          ? 'bg-[#00FFC2] text-gray-900 shadow-[0_0_15px_#00FFC2]' 
+          : 'bg-gray-800 text-white hover:bg-gray-700'
+        }`;
+        button.onclick = () => {
+          currentSkill = skill;
+          currentTopic = '';
+          const firstTopic = Object.keys(challengeData[currentSkill])[0];
+          renderSkills();
+          renderTopics(skill, firstTopic);
+        };
+        navContainer.appendChild(button);
+      });
+    }
+
+    function renderTopics(skill, activeTopic) {
+      const topicsContainer = document.getElementById('topics-container');
+      topicsContainer.innerHTML = '';
+      const topics = Object.keys(challengeData[skill] || {});
+      
+      topics.forEach(topic => {
+        const card = document.createElement('div');
+        card.className = `bg-gray-800 p-6 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02] ${topic === activeTopic ? 'border-2 border-[#00FFC2]' : ''}`;
+        card.innerHTML = `<h3 class="text-xl font-bold">${topic}</h3>
+                          <p class="text-gray-400 text-sm">${challengeData[skill][topic].length} challenges</p>`;
+        card.onclick = () => {
+          currentTopic = topic;
+          renderTopics(skill, topic);
+          renderChallenges(skill, topic);
+        };
+        topicsContainer.appendChild(card);
+      });
+
+      renderChallenges(skill, activeTopic);
+    }
+
+    function renderChallenges(skill, topic) {
+      const container = document.getElementById('challenges-container');
+      container.innerHTML = '';
+
+      const challenges = challengeData[skill][topic] || [];
+      if (!challenges.length) {
+        container.innerHTML = `<p class="text-center text-gray-500">No challenges found.</p>`;
+        return;
+      }
+
+      ["Easy", "Medium", "Hard"].forEach(level => {
+        const levelChallenges = challenges.filter(c => c.level === level);
+        if (levelChallenges.length) {
+          const section = document.createElement('div');
+          section.className = "mb-8";
+          section.innerHTML = `<h3 class="text-2xl font-bold text-gray-300 mb-4">${level}</h3>
+                               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>`;
+          const grid = section.querySelector('div');
+
+          levelChallenges.forEach(challenge => {
+            const card = document.createElement('div');
+            card.className = "bg-gray-800 p-6 rounded-xl shadow-lg transition transform hover:scale-105";
+            card.innerHTML = `
+              <h4 class="text-lg font-bold">${challenge.name}</h4>
+              <span class="inline-block rounded-full px-3 py-1 text-xs font-bold mt-2 
+                ${level === 'Easy' ? 'bg-green-600' : level === 'Medium' ? 'bg-yellow-600' : 'bg-red-600'}">${level}</span>
+              <span class="ml-2 px-2 py-0.5 rounded text-xs bg-blue-600">${challenge.type}</span>
+              <p class="text-sm text-gray-400 mt-4">${challenge.description}</p>
+              <a href="challenge-detail.html?id=${challenge.id}" 
+                 class="inline-flex items-center font-bold py-2 px-6 mt-4 rounded-full text-base bg-[#00FFC2] text-gray-900 transition-all shadow-[0_0_15px_#00FFC2] hover:shadow-[0_0_25px_#00FFC2] hover:scale-105">
+                Start Challenge
+              </a>`;
+            grid.appendChild(card);
+          });
+
+          container.appendChild(section);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

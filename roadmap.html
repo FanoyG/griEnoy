@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Challenge Lab - Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+        body { background:#1B1B1B; color:#F5F5F5; font-family:'Roboto Mono', monospace; }
+        ::-webkit-scrollbar{height:8px;width:8px;}
+        ::-webkit-scrollbar-track{background:#1B1B1B;border-radius:10px;}
+        ::-webkit-scrollbar-thumb{background:#2D2D2D;border-radius:10px;}
+        ::-webkit-scrollbar-thumb:hover{background:#4A4A4A;}
+        .role-btn.active { background:#00FFC2; color:#1B1B1B; }
+        .card { background:#2D2D2D; padding:1.5rem; border-radius:1rem; transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: scale(1.03); box-shadow: 0 0 15px #00FFC2; }
+        .difficulty-easy { background:#16A34A; }
+        .difficulty-medium { background:#FBBF24; }
+        .difficulty-hard { background:#EF4444; }
+        .error-link { background:#EF4444; color:#FFF; cursor:not-allowed; opacity:0.7; }
+    </style>
+</head>
+<body class="selection:bg-green-300 selection:text-green-900">
+
+<div class="container mx-auto max-w-7xl px-4 md:px-0 py-5">
+
+    <!-- Header -->
+    <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5">
+        <img src="logo1.png" alt="Logo" width="150" height="442">
+        <nav class="flex flex-wrap items-center text-base justify-center md:justify-end">
+            <a href="index.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
+            <a href="challenges.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
+            <a href="docs.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="mt-8">
+        <h1 class="text-4xl font-bold text-center text-[#00FFC2] mb-8">Learning Roadmap</h1>
+
+        <!-- Roles Navigation -->
+        <div class="flex flex-wrap justify-center mb-8 gap-3" id="role-nav"></div>
+
+        <!-- Skills & Topics -->
+        <div id="skills-section"></div>
+    </main>
+</div>
+
+<footer class="text-gray-400 body-font border-t border-gray-800 mt-5">
+  <div class="container px-5 py-4 mx-auto flex items-center justify-between">
+    <p class="text-sm">© 2025 SOC Challenge Lab</p>
+    <span class="inline-flex space-x-3">
+      <a href="#" class="hover:text-white">🐦</a>
+      <a href="#" class="hover:text-white">📷</a>
+      <a href="#" class="hover:text-white">💼</a>
+    </span>
+  </div>
+</footer>
+
+<script src="roadmap.js"></script>
+<script>
+let currentRole = Object.keys(roadmapData)[0];
+
+window.onload = function() {
+    renderRoles();
+    renderSkills(currentRole);
+};
+
+function renderRoles() {
+    const nav = document.getElementById("role-nav");
+    nav.innerHTML = "";
+    Object.keys(roadmapData).forEach(role => {
+        const btn = document.createElement("button");
+        btn.textContent = role;
+        btn.className = `py-2 px-6 rounded-full font-bold transition duration-300 ${
+            role === currentRole ? 'role-btn active' : 'bg-gray-800 hover:bg-gray-700'
+        }`;
+        btn.onclick = () => {
+            currentRole = role;
+            renderRoles();
+            renderSkills(role);
+        };
+        nav.appendChild(btn);
+    });
+}
+
+function renderSkills(role) {
+    const container = document.getElementById("skills-section");
+    container.innerHTML = "";
+    const skills = roadmapData[role];
+    Object.keys(skills).forEach(skill => {
+        const skillDiv = document.createElement("div");
+        skillDiv.className = "mb-10";
+        skillDiv.innerHTML = `<h2 class="text-3xl font-bold text-[#00FFC2] mb-6 border-b-2 border-gray-700 pb-2">${skill}</h2>`;
+        const grid = document.createElement("div");
+        grid.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+
+        skills[skill].forEach(topic => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            // Check if lab link exists and not "#"
+            const labLink = (topic.lab && topic.lab !== "#") 
+                ? `<a href="${topic.lab}" class="inline-flex items-center font-bold py-2 px-4 rounded-full bg-[#00FFC2] text-gray-900 transition-all shadow-[0_0_15px_#00FFC2] hover:shadow-[0_0_25px_#00FFC2] hover:scale-105">Start Lab</a>`
+                : `<span class="inline-flex items-center font-bold py-2 px-4 rounded-full error-link">Lab Not Available</span>`;
+
+            card.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${topic.topic}</h3>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${
+                    topic.difficulty==="Easy" ? "difficulty-easy" : topic.difficulty==="Medium" ? "difficulty-medium" : "difficulty-hard"
+                }">${topic.difficulty}</span>
+                <div class="mt-4">${labLink}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        skillDiv.appendChild(grid);
+        container.appendChild(skillDiv);
+    });
+}
+</script>
+
+</body>
+</html>

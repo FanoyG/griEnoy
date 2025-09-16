@@ -1,0 +1,235 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GriEnoy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Roboto Mono', monospace;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #121212;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555555;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .selection\:bg-green-300::selection {
+            background-color: #4ade80;
+        }
+
+        .selection\:text-green-900::selection {
+            color: #14532d;
+        }
+        .mr-4 {
+            margin-right: 12.25rem;
+        }
+    </style>
+</head>
+<body class="selection:bg-green-300 selection:text-green-900">
+
+    <!-- Main page container with centered content -->
+    <div class="container mx-auto max-w-7xl px-6 md:px-0">
+
+        <!-- Header / Navigation -->
+        <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-6 md:py-8 border-b border-gray-800">
+            <a href="index.html" class="flex title-font font-extrabold items-center text-[#00FFC2] mb-4 md:mb-0 text-2xl tracking-wide hover:text-white transition-colors duration-300">
+                <img src="logo1.png" alt="Logo" width="150px" height="442px">
+            </a>
+            <nav class="flex flex-wrap items-center text-base justify-center md:justify-end space-x-8">
+                <a href="index.html" class="mr-4 text-gray-400 hover:text-[#FFB266] transition-colors duration-300 font-semibold cursor-pointer text-lg">Home</a>
+                <a href="challenges.html" class="mr-4 text-gray-400 hover:text-[#FFB266] transition-colors duration-300 font-semibold cursor-pointer text-lg">Challenges</a>
+                <a href="https://github.com/FanoyG/griEnoy" class="mr-4 text-gray-400 hover:text-[#FFB266] transition-colors duration-300 font-semibold cursor-pointer text-lg">GitHub</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="flex flex-col items-center justify-center text-center py-24 md:py-36 px-4 md:px-0 bg-gradient-to-b from-[#002b22] to-[#001712] rounded-3xl shadow-lg mt-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#00FFC2] leading-tight mb-6 animate-fade-in-down drop-shadow-lg">
+                Learn SOC Skills the Fun Way 🚀 — Through Real-World CTF Challenges
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mb-10 animate-fade-in">
+                Turn your Windows or Linux VM into a cyber range. Solve challenges, hunt threats, and level up as a SOC Analyst.
+            </p>
+            <a href="roadmap.html" class="inline-flex items-center font-extrabold py-4 px-12 rounded-full text-lg bg-[#FFB266] text-gray-900 shadow-[0_0_20px_#00FFC2] hover:shadow-[0_0_40px_#00FFC2] hover:scale-110 transition-transform duration-300 animate-fade-in">
+                Start Learning Now
+            </a>
+        </section>
+
+        <!-- About the Platform Section -->
+        <section class="py-16 md:py-24">
+            <h2 class="text-4xl font-extrabold text-[#00FFC2] text-center mb-16 tracking-wide drop-shadow-md">About the Platform</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/50">
+                    <div class="h-24 w-24 mx-auto bg-[#004d3d] rounded-full flex items-center justify-center mb-6 text-5xl">
+                        🕹️
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">What is this platform?</h3>
+                    <p class="text-gray-400 text-base leading-relaxed">A gamified cybersecurity learning platform where you solve realistic SOC challenges inside your own VM. Scripts simulate incidents like malware, brute-force attacks, and suspicious commands.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/50">
+                    <div class="h-24 w-24 mx-auto bg-[#004d3d] rounded-full flex items-center justify-center mb-6 text-5xl">
+                        👥
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Who can use it?</h3>
+                    <p class="text-gray-400 text-base leading-relaxed">Students, SOC aspirants, CTF enthusiasts, and self-learners who want hands-on practice in a safe, controlled environment.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/50">
+                    <div class="h-24 w-24 mx-auto bg-[#004d3d] rounded-full flex items-center justify-center mb-6 text-5xl">
+                        🎯
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Why use it?</h3>
+                    <p class="text-gray-400 text-base leading-relaxed">SOC training is usually expensive or abstract. Here, learning is free, practical, and fun. Every challenge mirrors real-world incidents.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/50">
+                    <div class="h-24 w-24 mx-auto bg-[#004d3d] rounded-full flex items-center justify-center mb-6 text-5xl">
+                        🏆
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">What will you gain?</h3>
+                    <p class="text-gray-400 text-base leading-relaxed">Practical SOC skills, a portfolio of solved challenges, XP and badges, and confidence to handle real cyber incidents.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 md:py-24 bg-[#001712] rounded-3xl shadow-inner">
+            <h2 class="text-4xl font-extrabold text-[#00FFC2] text-center mb-16 tracking-wide drop-shadow-md">Features</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 px-4 md:px-0">
+                <div class="bg-gray-900 p-8 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/60">
+                    <h3 class="text-lg font-bold text-white mb-3">Windows-focused challenges</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Rare in most CTFs; focus on real-world Windows incidents.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/60">
+                    <h3 class="text-lg font-bold text-white mb-3">Step-by-step progression</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Challenges build your skills gradually.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/60">
+                    <h3 class="text-lg font-bold text-white mb-3">Scripts simulate real incidents</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Malware, logs, and suspicious actions in your VM.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/60">
+                    <h3 class="text-lg font-bold text-white mb-3">Flag-based learning system</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Immediate feedback for every challenge.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-xl shadow-xl transition-transform transform hover:scale-105 hover:shadow-[#00FFC2]/60">
+                    <h3 class="text-lg font-bold text-white mb-3">Badges & leaderboard</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Track progress, earn rewards, stay motivated.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 md:py-24">
+            <h2 class="text-4xl font-extrabold text-[#00FFC2] text-center mb-16 tracking-wide drop-shadow-md">How It Works</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 px-4 md:px-0">
+                <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-3xl shadow-lg hover:shadow-[#00FFC2]/70 transition-shadow duration-300">
+                    <span class="text-5xl text-[#00FFC2] mb-6 font-extrabold">1️⃣</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-3">Pick a Challenge</h3>
+                    <p class="text-gray-400 text-base leading-relaxed max-w-xs">Choose a mission from Windows, Linux, or other categories.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-3xl shadow-lg hover:shadow-[#00FFC2]/70 transition-shadow duration-300">
+                    <span class="text-5xl text-[#00FFC2] mb-6 font-extrabold">2️⃣</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-3">Download Script</h3>
+                    <p class="text-gray-400 text-base leading-relaxed max-w-xs">Run it safely inside your VM.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-3xl shadow-lg hover:shadow-[#00FFC2]/70 transition-shadow duration-300">
+                    <span class="text-5xl text-[#00FFC2] mb-6 font-extrabold">3️⃣</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-3">Investigate</h3>
+                    <p class="text-gray-400 text-base leading-relaxed max-w-xs">Use SOC skills to find the answer.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6 bg-gray-900 rounded-3xl shadow-lg hover:shadow-[#00FFC2]/70 transition-shadow duration-300">
+                    <span class="text-5xl text-[#00FFC2] mb-6 font-extrabold">4️⃣</span>
+                    <h3 class="text-2xl font-extrabold text-white mb-3">Submit Flag</h3>
+                    <p class="text-gray-400 text-base leading-relaxed max-w-xs">Earn XP, unlock badges, and climb the leaderboard.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Call-to-Action -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-t from-[#002b22] to-[#001712] rounded-3xl shadow-lg px-6 md:px-0">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-8 tracking-wide drop-shadow-md">
+                Ready to begin your SOC journey?
+            </h2>
+            <p class="text-lg text-gray-300 mb-10 max-w-xl mx-auto leading-relaxed">
+                Choose your first challenge today and start learning like a real analyst.
+            </p>
+            <a href="challenges.html" class="inline-flex items-center font-extrabold py-4 px-14 focus:outline-none rounded-full text-lg bg-[#FFB266] text-gray-900 transition-all duration-300 shadow-[0_0_25px_#FFB266] hover:shadow-[0_0_50px_#FFB266] hover:scale-110">
+                Explore Challenges
+            </a>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-gray-400 body-font border-t border-gray-800 mt-12">
+        <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col justify-between">
+            <p class="text-sm text-gray-400 mt-2 sm:mt-0 select-none">© 2025 SOC Challenge Lab</p>
+            <span class="inline-flex mt-4 sm:mt-0 justify-center sm:justify-start space-x-6">
+                <a href="#" class="text-gray-400 hover:text-[#00FFC2] transition-colors duration-300" aria-label="Twitter">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-[#00FFC2] transition-colors duration-300" aria-label="Instagram">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-[#00FFC2] transition-colors duration-300" aria-label="LinkedIn">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-6 h-6" viewBox="0 0 24 24">
+                        <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 12.5V20.5h4V12.5zM4 9a2 2 0 100-4 2 2 0 000 4z"></path>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
