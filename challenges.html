@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOC Challenge Lab - Challenges</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link href="./dist/output.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
@@ -30,21 +31,25 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #4A4A4A;
     }
+
+    nav a.nav-text{
+      font-size: 1.37rem;
+    }
   </style>
 </head>
 <body class="selection:bg-green-300 selection:text-green-900">
   <div class="container mx-auto max-w-7xl px-4 md:px-0">
 
     <!-- Header -->
-    <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5">
-      <a href="index.html" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-        <img src="assets/images/logo1.png" alt="Logo" width="150px" height="112px">
+    <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5 mt-14">
+      <a href="index.html" class="flex title-font font-medium items-center text-white mb-4 md:mb-0 mt-3.5">
+        <img src="assets/images/logo1.png" alt="Logo" width="190px" height="112px">
       </a>
       <nav class="flex flex-wrap items-center text-base justify-center md:justify-end">
-            <a href="index.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
-            <a href="challenges.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
-            <a href="docs.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
-            <a href="roadmap.html" class="px-5 py-3 rounded-full text-lg font-extrabold text-gray-900 bg-[#FFB266] shadow-[0_0_20px_#00FFC2] hover:shadow-[0_0_40px_#00FFC2] hover:scale-105 transition-transform duration-300">
+            <a href="index.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
+            <a href="challenges.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
+            <a href="docs.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
+            <a href="roadmap.html" class="px-5 py-3 rounded-full text-lg font-extrabold text-gray-900 bg-[#FFB266]  hover:shadow-[0_0_40px_#00FFC2] hover:scale-105 transition-transform duration-300">
                 See Roadmap
             </a>
       </nav>

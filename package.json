@@ -1,0 +1,24 @@
+{
+  "name": "grienoy",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">\r <img src=\"https://github.com/FanoyG/griEnoy/blob/main/assets/images/logo1.png\" width= \"350px\" height= \"125px\" alt= \"Logog\">\r </div>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FanoyG/griEnoy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FanoyG/griEnoy/issues"
+  },
+  "homepage": "https://github.com/FanoyG/griEnoy#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "tailwindcss": "^4.1.13"
+  }
+}

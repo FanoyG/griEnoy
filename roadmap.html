@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOC Challenge Lab - Roadmap</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="./dist/output.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
         body { background:#1B1B1B; color:#F5F5F5; font-family:'Roboto Mono', monospace; }
@@ -19,6 +20,10 @@
         .difficulty-medium { background:#FBBF24; }
         .difficulty-hard { background:#EF4444; }
         .error-link { background:#EF4444; color:#FFF; cursor:not-allowed; opacity:0.7; }
+    
+    nav a.nav-text {
+        font-size: 23px;
+    }
     </style>
 </head>
 <body class="selection:bg-green-300 selection:text-green-900">
@@ -27,11 +32,11 @@
 
     <!-- Header -->
     <header class="flex flex-wrap flex-col md:flex-row items-center justify-between py-5">
-        <img src="assets/images/logo1.png" alt="Logo" width="150" height="442">
+        <img src="assets/images/logo1.png" alt="Logo" width="190" height="142">
         <nav class="flex flex-wrap items-center text-base justify-center md:justify-end">
-            <a href="index.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
-            <a href="challenges.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
-            <a href="docs.html" class="px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
+            <a href="index.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Home</a>
+            <a href="challenges.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Challenges</a>
+            <a href="docs.html" class="nav-text px-5 py-3 rounded-full text-lg font-bold text-gray-400 hover:text-[#FFB266] transition-colors duration-300">Docs</a>
         </nav>
     </header>
 
